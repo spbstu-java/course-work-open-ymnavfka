@@ -1,0 +1,4 @@
+[submodule "labs"]
+	path = labs
+	url = https://github.com/spbstu-java/labs-open-ymnavfka.git
+	branch = main
