@@ -107,12 +107,30 @@ public class MainApp extends Application {
     private Pane task4Pane() {
         TextField input = new TextField();
         input.setPromptText("numbers or words (comma or space separated)");
+
+        ComboBox<String> methodBox = new ComboBox<>();
+        methodBox.getItems().addAll(
+                "average",
+                "uniqueSquares",
+                "sumEven",
+                "toMap",
+                "toUpperWithPrefix",
+                "lastElement"
+        );
+        methodBox.setPromptText("Select method");
+
         Button run = new Button("Run");
         run.setOnAction(e -> {
             output.clear();
-            Task4Runner.run(output, safeText(input));
+            String method = methodBox.getValue();
+            if (method == null) {
+                output.appendText("Please select a method.\n");
+                return;
+            }
+            Task4Runner.run(output, safeText(input), method);
         });
-        HBox h = new HBox(8, input, run);
+
+        HBox h = new HBox(8, methodBox, input, run);
         h.setPadding(new javafx.geometry.Insets(10));
         return h;
     }
